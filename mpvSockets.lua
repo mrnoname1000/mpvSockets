@@ -3,16 +3,12 @@
 local utils = require 'mp.utils'
 
 local function get_temp_path()
-    local directory_seperator = package.config:match("([^\n]*)\n?")
     local example_temp_file_path = os.tmpname()
 
     -- remove generated temp file
     pcall(os.remove, example_temp_file_path)
 
-    local seperator_idx = example_temp_file_path:reverse():find(directory_seperator)
-    local temp_path_length = #example_temp_file_path - seperator_idx
-
-    return example_temp_file_path:sub(1, temp_path_length)
+    return utils.split_path(example_temp_file_path)
 end
 
 tempDir = get_temp_path()
