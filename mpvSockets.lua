@@ -22,8 +22,18 @@ function join_paths(...)
     return path;
 end
 
+function mkdir(...)
+    return mp.command_native({
+        name = "subprocess",
+        capture_stdout = true,
+        capture_stderr = true,
+        playback_only = false,
+        args = {"mkdir", "--", ...},
+    })
+end
+
 ppid = utils.getpid()
-os.execute("mkdir -- " .. join_paths(tempDir, "mpvSockets") .. " 2>/dev/null")
+mkdir(join_paths(tempDir, "mpvSockets"))
 mp.set_property("options/input-ipc-server", join_paths(tempDir, "mpvSockets", ppid))
 
 function shutdown_handler()
