@@ -30,8 +30,4 @@ socket_path = utils.join_path(socket_dir, ppid)
 mkdir(socket_dir)
 mp.set_property("options/input-ipc-server", socket_path)
 
-function shutdown_handler()
-    os.remove(socket_dir)
-    os.remove(socket_path)
-end
-mp.register_event("shutdown", shutdown_handler)
+mp.register_event("shutdown", function() os.remove(socket_dir); os.remove(socket_path) end)
