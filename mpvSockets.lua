@@ -6,7 +6,7 @@ local function get_temp_path()
     local example_temp_file_path = os.tmpname()
 
     -- remove generated temp file
-    pcall(os.remove, example_temp_file_path)
+    os.remove(example_temp_file_path)
 
     return utils.split_path(example_temp_file_path)
 end
