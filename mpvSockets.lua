@@ -11,15 +11,6 @@ local function get_temp_path()
     return utils.split_path(example_temp_file_path)
 end
 
-function join_paths(...)
-    local arg={...}
-    local path = ""
-    for i,v in ipairs(arg) do
-        path = utils.join_path(path, tostring(v))
-    end
-    return path;
-end
-
 function mkdir(...)
     return mp.command_native({
         name = "subprocess",
