@@ -31,7 +31,7 @@ mkdir(socket_dir)
 mp.set_property("options/input-ipc-server", socket_path)
 
 function shutdown_handler()
-        os.remove(socket_dir)
-        os.remove(socket_path)
+    os.remove(socket_dir)
+    os.remove(socket_path)
 end
 mp.register_event("shutdown", shutdown_handler)
