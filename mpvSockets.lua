@@ -19,7 +19,7 @@ tempDir = get_temp_path()
 
 function join_paths(...)
     local arg={...}
-    path = ""
+    local path = ""
     for i,v in ipairs(arg) do
         path = utils.join_path(path, tostring(v))
     end
