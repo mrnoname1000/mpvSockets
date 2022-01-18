@@ -30,14 +30,17 @@ function mkdir(...)
     })
 end
 
+ppid = utils.getpid()
 temp_dir = get_temp_path()
 
-ppid = utils.getpid()
-mkdir(join_paths(temp_dir, "mpvSockets"))
-mp.set_property("options/input-ipc-server", join_paths(temp_dir, "mpvSockets", ppid))
+socket_dir = utils.join_path(temp_dir, "mpvSockets")
+socket_path = utils.join_path(socket_dir, ppid)
+
+mkdir(socket_dir)
+mp.set_property("options/input-ipc-server", socket_path)
 
 function shutdown_handler()
-        os.remove(join_paths(temp_dir, "mpvSockets", ppid))
-        os.remove(join_paths(temp_dir, "mpvSockets"))
+        os.remove(socket_dir)
+        os.remove(socket_path)
 end
 mp.register_event("shutdown", shutdown_handler)
