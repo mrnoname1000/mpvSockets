@@ -11,8 +11,6 @@ local function get_temp_path()
     return utils.split_path(example_temp_file_path)
 end
 
-temp_dir = get_temp_path()
-
 function join_paths(...)
     local arg={...}
     local path = ""
@@ -31,6 +29,8 @@ function mkdir(...)
         args = {"mkdir", "--", ...},
     })
 end
+
+temp_dir = get_temp_path()
 
 ppid = utils.getpid()
 mkdir(join_paths(temp_dir, "mpvSockets"))
