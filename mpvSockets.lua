@@ -11,7 +11,7 @@ local function get_temp_path()
     return utils.split_path(example_temp_file_path)
 end
 
-tempDir = get_temp_path()
+temp_dir = get_temp_path()
 
 function join_paths(...)
     local arg={...}
@@ -33,11 +33,11 @@ function mkdir(...)
 end
 
 ppid = utils.getpid()
-mkdir(join_paths(tempDir, "mpvSockets"))
-mp.set_property("options/input-ipc-server", join_paths(tempDir, "mpvSockets", ppid))
+mkdir(join_paths(temp_dir, "mpvSockets"))
+mp.set_property("options/input-ipc-server", join_paths(temp_dir, "mpvSockets", ppid))
 
 function shutdown_handler()
-        os.remove(join_paths(tempDir, "mpvSockets", ppid))
-        os.remove(join_paths(tempDir, "mpvSockets"))
+        os.remove(join_paths(temp_dir, "mpvSockets", ppid))
+        os.remove(join_paths(temp_dir, "mpvSockets"))
 end
 mp.register_event("shutdown", shutdown_handler)
