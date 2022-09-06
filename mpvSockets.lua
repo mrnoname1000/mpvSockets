@@ -21,6 +21,11 @@ local function mkdir(...)
     })
 end
 
+local option_info = utils.parse_json(mp.get_property("option-info/input-ipc-server"))
+if option_info["set-from-commandline"] then
+	return
+end
+
 local ppid = utils.getpid()
 local temp_dir = get_temp_path()
 
